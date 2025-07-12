@@ -1,31 +1,32 @@
 "use client"
 
-import Produto from "@/componentes/Produto"
+import TextButton from "@/componentes/TextButton";
+import TextoPadrao from "@/componentes/TextoPadrao";
+import { useState } from "react";
 
-function comprar(){
-    alert("Comprar")
-}
 
-export default function Index(){
+export default function Home(){
+
+    const [texto, setTexto] = useState<boolean>(false)  //Use state do tipo Boolean
+
+    
+    function show(){
+        if(texto == false){
+            setTexto(true);
+        }else{
+            setTexto(false);
+        }
+        
+    }
+
     return(
-        <div className="h-screen bg-[#F2F2F2]">
-            <div className= "bg-[#63335A]">
-                <h1 className="text-center text-white font-bold pb-20">Produtos</h1>
-            </div>
-            <div className="p-6 flex items-center justify-center gap-2"> 
-                <Produto titulo="NIKE" tamanho={39} preco={299} funcao={comprar}>
-                    <div >
-                        <img className="rounded-sm" src="/images.jfif" alt="Foto do produto" />
-                    </div>
-                </Produto>
+        <>
 
-                 <Produto titulo="ADIDAS"  tamanho={40} preco={499} funcao={comprar}>
-                    <div >
-                        <img className="rounded-sm" src="/adidas.png" alt="Foto do produto" />
-                    </div> 
-                </Produto>
-            </div>
-            
-        </div>
+        <TextButton funcao={show} texto="Clique"></TextButton>
+
+        {texto ? <TextoPadrao/> : <p></p>}
+        
+        </>
     )
+
 }

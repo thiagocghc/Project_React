@@ -1,32 +1,32 @@
-"use client"
+import Product from "@/componentes/Product";
 
-import TextButton from "@/componentes/TextButton";
-import TextoPadrao from "@/componentes/TextoPadrao";
-import { useState } from "react";
+//PROPRIEDADES DOS DADOS RECEBIDOS PELA API
+type propsProd = {
+    id:number,
+    title:string,
+    image:string,
+    price:string,
+    description:string
+}
 
+export default async function Home(){
 
-export default function Home(){
-
-    const [texto, setTexto] = useState<boolean>(false)  //Use state do tipo Boolean
-
-    
-    function show(){
-        if(texto == false){
-            setTexto(true);
-        }else{
-            setTexto(false);
-        }
-        
-    }
+    const response = await fetch('https://fakestoreapi.com/products');
+    const data : propsProd[] = await response.json()
+    console.log(data)
 
     return(
         <>
+        <div className="p-5 bg-gray-100 gap-2 flex flex-wrap">
+                {data.map((prod) => (
+                           
+                 <div className="shadow-md" key={prod.id}>
 
-        <TextButton funcao={show} texto="Clique"></TextButton>
+                    <Product titulo={prod.title.split(" ")[0]} imagem={prod.image} descricao={prod.description.slice(0, 100)}  />                   
 
-        {texto ? <TextoPadrao/> : <p></p>}
-        
+                </div>
+            ))}
+        </div>
         </>
     )
-
 }

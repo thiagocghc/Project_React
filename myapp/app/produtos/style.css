@@ -1,0 +1,13 @@
+.btn-submit {
+  background: linear-gradient(90deg, #2563eb 0%, #1e40af 100%);
+  color: #fff;
+  box-shadow: 0 3px 10px rgba(30,64,175,0.12);
+  border: none;
+}
+
+.btn-submit:hover, .btn-submit:focus {
+  background: linear-gradient(90deg, #1e40af 0%, #2563eb 100%);
+  transform: scale(1.03) translateY(-2px);
+  box-shadow: 0 6px 20px rgba(30,64,175,0.24);
+  cursor: pointer;
+}

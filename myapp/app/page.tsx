@@ -22,8 +22,7 @@ export default async function Home(){
                            
                  <div className="shadow-md" key={prod.id}>
 
-                    <Product titulo={prod.title.split(" ")[0]} imagem={prod.image} descricao={prod.description.slice(0, 100)}  />                   
-
+                    <Product  id={prod.id} titulo={prod.title.split(" ")[0]} imagem={prod.image} descricao={prod.description.slice(0, 100)}  /> 
                 </div>
             ))}
         </div>

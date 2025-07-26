@@ -1,9 +1,12 @@
 "use client"
 
+import { link } from 'fs';
 import '../styles/MeuComponente.css';
 import { WiDayCloudy } from "react-icons/wi";
+import Link from 'next/link';
 
 type props = {
+    id: number,
     titulo:string,
     preco?: number,
     descricao?:string,
@@ -15,7 +18,7 @@ function alertaDeCompra(){
     alert("Comprar")
 }
 
-export default function Product({titulo,preco,descricao,imagem,funcao}:props){
+export default function Product({id,titulo,preco,descricao,imagem,funcao}:props){
   return (
     <div className="rounded-sm flex-col p-3 bg-white w-50 ">
         <div className="">
@@ -30,9 +33,12 @@ export default function Product({titulo,preco,descricao,imagem,funcao}:props){
         </div>
 
         <div className="p-2 ">
-            <button onClick={alertaDeCompra} className="bg-[#63335A]  p-2 text-amber-50 w-40 rounded-md">
-                Comprar
-            </button>
+            <Link href={`/usuarios/${id}`}>
+                <button className="bg-[#63335A]  p-2 text-amber-50 w-40 rounded-md">
+                    Comprar
+                </button>
+            </Link>
+            
         </div>
     </div>
   );

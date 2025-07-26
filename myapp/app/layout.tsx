@@ -27,7 +27,23 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <header className="flex justify-between p-5">
+          <div id="logo"><img src="/public/logo.png" alt="Foto Logo" /></div>
+          <div id="busca"> <input type="text" className="bg-gray-100 w-2xs" placeholder="Pesquisar"/> </div>
+          <div id="login">  <button className="bg-gray-400 p-2 rounded-2xl">Login</button> </div>
+            
+        </header>
+        <nav className="bg-black p-2">
+          <ul className="flex justify-around">
+            <li className="text-amber-50">Home</li> 
+            <li className="text-amber-50">Sobre</li> 
+            <li className="text-amber-50">Produtos</li> 
+            <li className="text-amber-50">Contato</li> 
+            
+          </ul>
+        </nav>
         {children}
+        <footer className="bg-black p-2"> <p className="text-center text-amber-50">  Dev by @Thiago Almeida </p> </footer>
       </body>
     </html>
   );

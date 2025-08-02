@@ -28,7 +28,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <header className="flex justify-between p-5">
-          <div id="logo"><img src="/public/logo.png" alt="Foto Logo" /></div>
+          <div id="logo"><img src="/logos/logo2.png" alt="Foto Logo" /></div>
           <div id="busca"> <input type="text" className="bg-gray-100 w-2xs" placeholder="Pesquisar"/> </div>
           <div id="login">  <button className="bg-gray-400 p-2 rounded-2xl">Login</button> </div>
             

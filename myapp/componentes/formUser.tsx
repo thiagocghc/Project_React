@@ -9,11 +9,30 @@ export default function FormularioUser(){
     const [nome,setNome] = useState("")
     const [email,setMail] = useState("")
     const [senha,setSenha] = useState("")
+    const [cpf,setCPF] = useState("")
     const [fone,setFone] = useState("")
 
     async function Salvar(event: React.FormEvent<HTMLFormElement>){
-
+        
         event.preventDefault()
+
+        const formulario = {
+            name:nome,
+            email:email,
+            senha: senha,
+            fone:fone,
+            cpf:cpf
+        }
+
+        const response = await fetch(`http://localhost:3000/api/users`,{
+            method:'POST',
+            headers:{"Content-Type":"application/json"},
+            body: JSON.stringify(formulario)
+        })
+
+        const data = await response.json()
+
+       
         console.log(nome)
         console.log(email)
         console.log(senha)

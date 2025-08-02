@@ -1,3 +1,5 @@
+/* TYPES   */
+
 
 export type userProps = {
     id?:number,

@@ -3,8 +3,7 @@ import Link from "next/link"
 
 export default async function Index(){
 
-    const response = await fetch(`${process.env.API_ROUTE}/api/users`)
-
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/users`)
     const data : userProps[] = await response.json()
     console.log(data)
 
@@ -15,7 +14,7 @@ export default async function Index(){
 
         {data.map((item) => (
             <div key={item.id}>
-                <p> Nome: {item.name} email: {item.email}  senha: {item.senha} </p>
+                <p>Id: {item.id} Nome: {item.nome} email: {item.email}  senha: {item.senha} <Link className="bg-blue-500" href={`/editarUser/${item.id}`}>Editar Usuario</Link> </p>
             </div>
 
         ))}

@@ -6,31 +6,21 @@ import { useReducer, useState } from "react";
 import { userProps } from '@/tipos';
 
 
-export default function FormularioUser({id,nome="",email="",senha="",cpf="",fone=""} : userProps ){
+export default function FormularioUser({id,nome="",email="",senha=""} : userProps ){
 
     //DADOS DO FORMULÁRIO 
     const rota = useRouter()
-
-    const [showModal, setShowModal] = useState(false);
-
-    //Caso o ID venha pela ROTA, req /user/1 recebe 
-    //Dessa forma consigo usar o mesmo form para cadastro e edição!!
-    const [user_id,setUserId] = useState<number | undefined>(id)
-
-    const [user_nome,setNome] = useState(nome)
-    const [user_email,setMail] = useState(email)
-    const [user_senha,setSenha] = useState(senha)
-    const [user_cpf,setCPF] = useState(cpf)
-    const [user_fone,setFone] = useState(fone)
+    const [user_nome,setNome] = useState("")
+    const [user_email,setMail] = useState("")
+    const [user_senha,setSenha] = useState("")
+    const [user_cpf,setCPF] = useState("")
+    const [user_fone,setFone] = useState("")
 
     async function Salvar(event: React.FormEvent<HTMLFormElement>){
         
-        event.preventDefault();
-
-        console.log("Id Recebido: ",user_id);
+        event.preventDefault()
 
         const formulario = {
-            id:user_id,
             nome:user_nome,
             email:user_email,
             senha: user_senha,
@@ -38,11 +28,8 @@ export default function FormularioUser({id,nome="",email="",senha="",cpf="",fone
             fone:user_fone
         }
 
-        //DEFININDO SE SERÁ CADASTRO OU EDIÇÃO
-        const metodo = user_id ? "PUT" : "POST";
-
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/users`,{
-            method: metodo,
+            method:'POST',
             headers:{'Content-Type':'application/json'},
             body: JSON.stringify(formulario)
         })
@@ -88,7 +75,6 @@ export default function FormularioUser({id,nome="",email="",senha="",cpf="",fone
                 type="text"
                 name="nome"
                 placeholder="Nome completo"
-                value={user_nome}
                 className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
                 onChange={(e) => setNome(e.target.value)}
@@ -98,7 +84,6 @@ export default function FormularioUser({id,nome="",email="",senha="",cpf="",fone
                 type="email"
                 name="email"
                 placeholder="E-mail"
-                value={user_email}
                 className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
                 onChange={(e) => setMail(e.target.value)}
@@ -108,17 +93,14 @@ export default function FormularioUser({id,nome="",email="",senha="",cpf="",fone
                 type="text"
                 name="cpf"
                 placeholder="CPF"
-                value={user_cpf}
                 className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
-                onChange={(e) => setCPF(e.target.value)}
                 />
 
                 <input
                 type="password"
                 name="senha"
                 placeholder="Senha"
-                 value={user_senha}
                 className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
                 onChange={(e) => setSenha(e.target.value)}
@@ -127,19 +109,18 @@ export default function FormularioUser({id,nome="",email="",senha="",cpf="",fone
                 <input
                 type="text"
                 name="fone"
-                 value={user_fone}
                 placeholder="Telefone" 
                 className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
-                onChange={(e) => setFone(e.target.value)}
+                    onChange={(e) => setFone(e.target.value)}
                 />
 
-            
-                {
-                    user_id 
-                    ?  <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition duration-200"> Editar Usuário </button>
-                    :  <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition duration-200"> Cadastrar Usuário </button>
-                }
+                <button
+                type="submit"
+                className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition duration-200"
+                >
+                Cadastrar
+                </button>
             </form>
 
         </div>

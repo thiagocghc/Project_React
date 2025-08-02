@@ -5,7 +5,7 @@ export default function Cadastrar(){
 
     return(
         <>
-            <FormularioUser/>
+            <FormularioUser />
         </>
     )
 }

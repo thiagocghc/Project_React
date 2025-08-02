@@ -1,11 +1,14 @@
 import db from '@/app/api/database';
 
-export async function GET(request: Request) {
+export async function GET(request: Request, {params} : {params:{id:string}} ) {
+
+    const {id} = params;
+    console.log(id)
 
     try{     
-        const [rows] = await db.query("SELECT * FROM pessoa");
+        const [row] = await db.query<any>("SELECT * FROM pessoa WHERE id=?",[id]);
         
-        return new Response(JSON.stringify(rows),{
+        return new Response(JSON.stringify(row[0]),{
             status:200,
             headers:{'Content-Type':'application/json'}
     })
@@ -18,6 +21,7 @@ export async function GET(request: Request) {
     }
     
 }
+
 
 export async function POST(request: Request){
 
@@ -43,13 +47,3 @@ export async function POST(request: Request){
 
 }
 
-
-export async function PUT(request: Request) {
-
-    const {id,nome,email,senha} = await request.json();
-
-    await db.query("UPDATE pessoa SET nome=?, email=?, senha=? WHERE id=?",[nome,email,senha,id])
-    
-    return new Response(JSON.stringify({valor: true}))  
-    
-}

@@ -1,4 +1,5 @@
 import { userProps } from "@/tipos"
+import Link from "next/link"
 
 export default async function Index(){
 
@@ -9,6 +10,8 @@ export default async function Index(){
 
     return(
         <>
+
+        <Link href="/cadastro">Cadastrar Usuário</Link>
 
         {data.map((item) => (
             <div key={item.id}>

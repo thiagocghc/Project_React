@@ -50,7 +50,7 @@ export async function PUT(request: Request) {
 
     await db.query("UPDATE pessoa SET nome=?, email=?, senha=? WHERE id=?",[nome,email,senha,id])
     
-    return new Response(JSON.stringify({valor: true}))  
+    return new Response(JSON.stringify({valor: true}));
     
 }
 
@@ -58,7 +58,6 @@ export async function DELETE(request:Request){
     const {id} = await request.json();
     console.log("Oiii")
 
-    await db.query("DELETE FROM user WHERE id = ?",[id]);
-
+    await db.query("DELETE FROM pessoa WHERE id = ?",[id]);
     return Response.json({sucesso:true})
 }

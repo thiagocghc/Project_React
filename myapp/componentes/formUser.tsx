@@ -27,14 +27,40 @@ export default function FormularioUser({id,nome="",email="",senha="",cpf="",fone
 
     async function Deletar(){
         try{
-            console.log("AAAAAAAAAAAA")
-            await fetch(`${process.env.NEXT_PUBLIC_API_ROUTE}/users`),{
+            //DELETAR PESSOA
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/users`,{
                 method:"DELETE",
                 headers:{
                     "Content-Type":"application/json"
                 },
                 body: JSON.stringify({id:user_id})
-            }
+            })
+
+            const data = await response.json()
+
+        if(data){
+             Swal.fire({
+                title: 'Deletado!!!!!',
+                text: 'O usuário foi deletado com sucesso.',
+                icon: 'success',
+                confirmButtonText: 'Ok',
+                timer: 2000,
+                timerProgressBar: true,
+                didClose: () => rota.push("/")
+            });
+            
+        }
+        else{
+            Swal.fire({
+                title: 'Erro!',
+                text: 'Ocorreu um erro ao cadastrar o usuário.',
+                icon: 'error',
+                confirmButtonText: 'Tentar novamente'
+            });
+        }
+
+       
+
         }catch(error){
             console.log(error)
         }
@@ -57,12 +83,6 @@ export default function FormularioUser({id,nome="",email="",senha="",cpf="",fone
 
         //DEFININDO SE SERÁ CADASTRO OU EDIÇÃO
         const metodo = user_id ? "PUT" : "POST";
-
-        try{
-
-        }catch (error){
-            
-        }
 
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/users`,{
             method: metodo,

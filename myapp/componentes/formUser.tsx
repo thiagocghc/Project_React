@@ -4,6 +4,8 @@ import Swal from 'sweetalert2'
 import { useRouter } from "next/navigation";
 import { useReducer, useState } from "react";
 import { userProps } from '@/tipos';
+import Button from './Button';
+import { headers } from 'next/headers';
 
 
 export default function FormularioUser({id,nome="",email="",senha="",cpf="",fone=""} : userProps ){
@@ -23,6 +25,21 @@ export default function FormularioUser({id,nome="",email="",senha="",cpf="",fone
     const [user_cpf,setCPF] = useState(cpf)
     const [user_fone,setFone] = useState(fone)
 
+    async function Deletar(){
+        try{
+            console.log("AAAAAAAAAAAA")
+            await fetch(`${process.env.NEXT_PUBLIC_API_ROUTE}/users`),{
+                method:"DELETE",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body: JSON.stringify({id:user_id})
+            }
+        }catch(error){
+            console.log(error)
+        }
+    }
+
     async function Salvar(event: React.FormEvent<HTMLFormElement>){
         
         event.preventDefault();
@@ -40,6 +57,12 @@ export default function FormularioUser({id,nome="",email="",senha="",cpf="",fone
 
         //DEFININDO SE SERÁ CADASTRO OU EDIÇÃO
         const metodo = user_id ? "PUT" : "POST";
+
+        try{
+
+        }catch (error){
+            
+        }
 
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/users`,{
             method: metodo,
@@ -140,7 +163,14 @@ export default function FormularioUser({id,nome="",email="",senha="",cpf="",fone
                     ?  <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition duration-200"> Editar Usuário </button>
                     :  <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition duration-200"> Cadastrar Usuário </button>
                 }
+
             </form>
+
+            <div>
+                  {
+                    user_id && <button onClick={Deletar} className="w-full bg-red-500 border-r-red-500 text-white py-2 rounded-md transition duration-200"> Excluir Usuário </button>
+                  }
+            </div>
 
         </div>
         </>

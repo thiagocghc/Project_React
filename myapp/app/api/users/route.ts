@@ -53,3 +53,12 @@ export async function PUT(request: Request) {
     return new Response(JSON.stringify({valor: true}))  
     
 }
+
+export async function DELETE(request:Request){
+    const {id} = await request.json();
+    console.log("Oiii")
+
+    await db.query("DELETE FROM user WHERE id = ?",[id]);
+
+    return Response.json({sucesso:true})
+}
